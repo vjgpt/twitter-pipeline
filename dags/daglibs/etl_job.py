@@ -16,8 +16,8 @@ def stage_tweets():
     you flag if its updated in the master file or not.
     All the parsed tweet needs to go to a csv file.
     """
-    homepath = '/usr/local/airflow/tweets/'
-    stage_file = join(homepath, 'data/tweets/tweets.csv')
+    homepath = '/usr/local/airflow/data/tweets/'
+    stage_file = join(homepath, 'data/tweets.csv')
     filenames = [f for f in listdir(homepath) if isfile(join(homepath, f))]
     df = pd.DataFrame(columns=['tweets','staged'])
     final_file = []
@@ -29,14 +29,14 @@ def stage_tweets():
             df.loc[len(df)] = tmp_df
         file1.truncate(0)
         file1.close()
-    df.to_csv('/usr/local/airflow/data/tweets/tweets.csv',mode='a',header=False,index=False)
+    df.to_csv('/usr/local/airflow/data/tweets.csv',mode='a',header=False,index=False)
 
 def commit_tweets():
     """
     Here all the tweets from stage path will go 
     into final csv files
     """
-    stage_file = join(homepath, 'data/tweets/tweets.csv')
+    stage_file = join(homepath, 'data/tweets.csv')
     final_file = join(homepath, 'data/finaltest.csv')
     try:
         stage_data = pd.read_csv(stage_file)
@@ -63,12 +63,18 @@ def commit_tweets():
                 final_data.loc[len(final_data)] = [stage_data['tweets'][stwee],'false']
             stage_data['staged'][stwee] = True
     stage_data.to_csv(stage_file,index=False)
-    final_data.to_csv(final_file, header=False,index=False)
+    final_data.to_csv(final_file,index=False)
     return True
 
 # Read from CSV, select tweet and post it and then change the status
 def post_tweet():
-    data = pd.read_csv("/usr/local/airflow/final.csv")
+
+    tfile = join(homepath, 'data/finaltest.csv')
+    try:
+        data = pd.read_csv(tfile)
+        data.columns = ['tweets','status']
+    except:
+        raise Exception("No tweets in file")
     for t in data.index:
         if data['status'][t] == False:
             #Post the tweet
@@ -77,10 +83,9 @@ def post_tweet():
 
             #Change the status
             data['status'][t] = True
-            data.to_csv('/usr/local/airflow/final.csv', index_label="Index", index=False)
+            data.to_csv(tfile, index=False)
             
             return True
         else:
             pass
     return False
-
