@@ -6,7 +6,7 @@ Here we will be building out a Twitter Scheduler data pipeline, the idea is to c
 - Make a Twitter Scheduler Data Pipeline.
 - Understand how Airflow works on Docker
 
-### To learn more about it follow my Medium blog [here]() :point_left: :books:
+### To learn more about it follow my Medium blog [here](https://medium.com/p/twitter-data-pipeline-using-apache-airflow-24e0881c214d?source=email-f17526e917b6--writer.postDistributed&sk=3fdccd5247579187f0d37b083d2f1dda) :point_left: :books:
 
 ## Pre-Requisites
 
@@ -93,5 +93,7 @@ docker-compose -f docker-compose-LocalExecutor.yml logs
 Add some tweets in the txt files present in `data/tweets` folder, you can add multiple tweets to that file or create a new file and add tweets in that. Then trigger the pipeline and you would find your tweet posted in your Twitter account and all the files getting backed up in Google Drive.
 
 
-If you need to learn more about how this pipeline works and how to use it effectively, Checkout this [blog]() where i have explained the process thoroughly. If this is helping you in some way, please support my work by liking my [blog]() or by giving this repo a star. Okay.Bye! Happy Learning!!
+If you need to learn more about how this pipeline works and how to use it effectively, Checkout this [blog](https://medium.com/p/twitter-data-pipeline-using-apache-airflow-24e0881c214d?source=email-f17526e917b6--writer.postDistributed&sk=3fdccd5247579187f0d37b083d2f1dda) where i have explained the process thoroughly. If this is helping you in some way, please support my work by liking my [blog](https://medium.com/p/twitter-data-pipeline-using-apache-airflow-24e0881c214d?source=email-f17526e917b6--writer.postDistributed&sk=3fdccd5247579187f0d37b083d2f1dda) or by giving this repo a star. 
+
+Happy Learning!!
 
